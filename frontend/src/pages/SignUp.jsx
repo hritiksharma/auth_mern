@@ -5,7 +5,7 @@ import "./SignUp.css";
 const SignUp = () => {
   return (
     <div>
-      <Header />
+      <Header title="SignUp" />
       <div className="form-container">
         <RegistrationForm />
       </div>
