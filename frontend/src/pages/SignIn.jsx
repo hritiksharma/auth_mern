@@ -1,9 +1,16 @@
-import React from 'react'
-
-const SignIn = () => {
+import React from "react";
+import Header from "../components/Header";
+import LoginForm from "../components/LoginForm";
+import "./SignIn.css";
+const SignUp = () => {
   return (
-    <div>SignIn</div>
-  )
-}
+    <div>
+      <Header title="SignIn" />
+      <div className="form-container">
+        <LoginForm />
+      </div>
+    </div>
+  );
+};
 
-export default SignIn
+export default SignUp;
