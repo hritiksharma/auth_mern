@@ -10,7 +10,7 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("APP is workings");
+  res.send("API is workings");
 });
 connectDB();
 app.use("/api/v1/", authRoutes);

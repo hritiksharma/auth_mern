@@ -26,8 +26,18 @@ const addProduct = async (req, res) => {
   }
 };
 
-const getAllProducts = (req, res) => {
-  const products = Product.find();
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+    if (products) {
+      res.status(200).json({ success: true, products });
+    } else {
+      res.status(404).json({ success: false, message: "no Products found" });
+    }
+  } catch (error) {
+    console.log("error", error);
+    throw new Error("error", error);
+  }
 };
 
 module.exports = { getAllProducts, addProduct };

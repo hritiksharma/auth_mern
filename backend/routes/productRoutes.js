@@ -6,6 +6,6 @@ const {
 } = require("../controllers/productControllers");
 
 router.get("/getProducts", getAllProducts);
-router.post("/addProduct", addProduct);
+router.post("/add-Product", addProduct);
 
 module.exports = router;
