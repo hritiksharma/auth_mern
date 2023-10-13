@@ -7,13 +7,13 @@ import { Route, Routes } from "react-router-dom";
 import { Container } from "@mui/material";
 function App() {
   return (
-    <div>
-      <Container>
-        <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/login" element={<SignIn />} />
-        </Routes>
-      </Container>
+    <div className="App">
+      {/* <Container> */}
+      <Routes>
+        <Route path="/" element={<SignUp />} />
+        <Route path="/login" element={<SignIn />} />
+      </Routes>
+      {/* </Container> */}
     </div>
   );
 }
