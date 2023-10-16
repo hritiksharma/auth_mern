@@ -4,10 +4,10 @@ const getJWTToken = require("../config/generateToken");
 const jwt = require("jsonwebtoken");
 
 const signUp = async (req, res) => {
-  console.log("inside the registration api ");
+  console.log("inside the registration api ", req.body);
   try {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
-    if (!firstName || lastName || !email || !password || !phoneNumber) {
+    if (!firstName || !lastName || !email || !password || !phoneNumber) {
       res
         .status(404)
         .json({ success: false, error: "all fields are required" });
@@ -31,13 +31,14 @@ const signUp = async (req, res) => {
       res.status(200).json({ success: true, message: "User is created", user });
     }
   } catch (error) {
-    console.log("error in signp");
+    console.log("error in signup");
     throw new Error(error);
   }
 };
 
 const signIn = async (req, res) => {
   try {
+    console.log("inside the login api", req.body);
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -46,6 +47,7 @@ const signIn = async (req, res) => {
     }
 
     const user = await User.findOne({ email }).select("+password");
+    console.log("user", user);
     const isPasswordMatched = await user.matchPassword(password);
 
     if (!isPasswordMatched) {

@@ -1,11 +1,28 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { login } from "../slices/auth";
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {};
+  const [successfull, setSuccessfull] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSuccessfull(false);
+
+    try {
+      const res = await dispatch(login({ email, password }));
+      if (res) {
+        setSuccessfull(true);
+        console.log("response from login#########", res);
+        navigate("/home");
+      }
+    } catch (error) {}
+  };
 
   return (
     <div className="form">

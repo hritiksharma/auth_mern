@@ -1,5 +1,5 @@
 import { Button, Stack, TextField, Snackbar, IconButton } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import { register } from "../slices/auth";
@@ -36,8 +36,8 @@ const RegistrationForm = () => {
     </>
   );
 
-  const handleSubmit = async () => {
-    console.log("inside the handleSubmit");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setSuccessfull(false);
     if (password !== confirmPassword) {
       <Snackbar
@@ -52,7 +52,7 @@ const RegistrationForm = () => {
 
     try {
       const res = await dispatch(
-        register(firstName, lastName, email, password, phoneNumber)
+        register({ firstName, lastName, email, password, phoneNumber })
       );
       if (res) {
         setSuccessfull(true);
