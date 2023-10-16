@@ -1,6 +1,8 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField, Snackbar, IconButton } from "@mui/material";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import CloseIcon from "@mui/icons-material/Close";
+import { register } from "../slices/auth";
 
 const RegistrationForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -10,7 +12,55 @@ const RegistrationForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const handleSubmit = () => {};
+  const [successfull, setSuccessfull] = useState("");
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const handleCloseSnackBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleCloseSnackBar}
+      >
+        <CloseIcon />
+      </IconButton>
+    </>
+  );
+
+  const handleSubmit = async () => {
+    console.log("inside the handleSubmit");
+    setSuccessfull(false);
+    if (password !== confirmPassword) {
+      <Snackbar
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleCloseSnackBar}
+        message="password and confirm Password not matched"
+        action={action}
+      />;
+      return;
+    }
+
+    try {
+      const res = await dispatch(
+        register(firstName, lastName, email, password, phoneNumber)
+      );
+      if (res) {
+        setSuccessfull(true);
+      }
+    } catch (error) {
+      setSuccessfull(false);
+    }
+  };
 
   return (
     <div className="form">
