@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 connectDB();
 app.use("/api/v1/", authRoutes);
-app.use("/api/v1/", productRotes);
+app.use("/api/v1/product", productRotes);
 
 app.listen(port, () => {
   console.log(`SERVER IS RUNNING OR PORT ${port}`);

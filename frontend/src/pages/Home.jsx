@@ -12,3 +12,8 @@ const Home = () => {
 };
 
 export default Home;
+
+// Add a poster
+// Add a Product Section
+// Button to add to cart
+// Add cart section navigation
